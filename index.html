@@ -6,19 +6,51 @@
     <title>Map Comments App</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
-        #map { height: 100vh; }
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        #container {
+            display: flex;
+            height: 100vh;
+        }
+        #sidebar {
+            width: 250px;
+            overflow-y: auto;
+            background: #f8f8f8;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        #map { flex: 1; }
+        #commentList {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        #commentList li {
+            padding: 4px 0;
+            border-bottom: 1px solid #ccc;
+        }
         .leaflet-popup-content-wrapper {
             overflow: visible;
         }
     </style>
 </head>
 <body>
-    <div id="map"></div>
+    <div id="container">
+        <div id="sidebar">
+            <h3>Comments</h3>
+            <ul id="commentList"></ul>
+        </div>
+        <div id="map"></div>
+    </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script>
         const map = L.map('map').setView([0, 0], 2);
+        const commentList = document.getElementById('commentList');
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
@@ -39,6 +71,13 @@
         function addCommentToMap(data) {
             L.marker([data.lat, data.lng]).addTo(map)
                 .bindPopup(`<b>${data.comment}</b>`);
+            addCommentToList(data);
+        }
+
+        function addCommentToList(data) {
+            const li = document.createElement('li');
+            li.textContent = data.comment;
+            commentList.appendChild(li);
         }
 
         map.on('click', function(e) {
