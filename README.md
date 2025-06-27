@@ -13,5 +13,3 @@ This simple app allows users to select locations on a map and leave comments. Ot
    node server.js
    ```
 3. Open `http://localhost:3000` in your browser.
-
-Click anywhere on the map to add a comment. Comments from all users are stored in a local SQLite database (`comments.db`) so that they persist between server restarts.
