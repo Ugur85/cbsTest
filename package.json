@@ -1,0 +1,19 @@
+{
+  "name": "cbstest",
+  "version": "1.0.0",
+  "description": "This simple app allows users to select locations on a map and leave comments. Other users connected to the app will see new comments appear in real time.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "socket.io": "^4.7.2",
+    "sqlite3": "^5.1.6"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
